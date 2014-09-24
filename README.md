@@ -4,10 +4,19 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 
 *Git It On*, the plugin for zshell, comes in here.
 
-`commands`
+`commands`: TODO: Write out list of commands
 
 
 ## Installation
+TODO: Write Installation
+
+
+## But why even leave vim for the command line?
+TODO: Make and link vim companion plugin.
+
+
+## These commands are too long, I want to be even faster!
+TODO: Explain aliasing.
 
 
 ## If you like this, you might also like...
