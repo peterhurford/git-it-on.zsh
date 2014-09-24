@@ -30,3 +30,12 @@ git_grep() {
   url="$url/search?q=$1"
   open $url
 }
+gitit() {
+  if [ $1 = "repo" ]; then git_open_repo
+  elif [ $1 = "compare" ]; then git_open_compare
+  elif [ $1 = "file" ]; then git_open_file $2
+  elif [ $1 = "history" ]; then git_open_history $2
+  elif [ $1 = "grep" ]; then git_grep $2
+  fi
+}
+#TODO: Can open a file even if not in the root repo
