@@ -4,8 +4,11 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 
 *Git It On*, the plugin for zshell, comes in here.
 
-`commands`: TODO: Write out list of commands
-
+* `gitit repo` -- opens the repository to your current branch
+* `gitit compare` -- opens the compare file between your branch and master
+* `gitit file <filename>` -- opens the github page for the desired file
+* `gitit history <filename>` -- opens the github history page for the file
+* `gitit grep <term>` -- opens the github search page for your term
 
 ## Installation
 TODO: Write Installation

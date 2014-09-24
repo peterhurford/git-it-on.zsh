@@ -39,3 +39,5 @@ gitit() {
   fi
 }
 #TODO: Can open a file even if not in the root repo
+#TODO: Git grep sends all arguments
+#TODO: Git open arbitrary branch
