@@ -25,3 +25,8 @@ git_open_history() {
   url="$url/commits/$branch/$1"
   open $url
 }
+git_grep() {
+  git_set_repo
+  url="$url/search?q=$1"
+  open $url
+}
