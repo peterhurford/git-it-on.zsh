@@ -67,3 +67,5 @@ gitit() {
   fi
 }
 #TODO: Gitit open arbitrary branch (gitit branch <branch>, gitit branch <branch> <filename>, gitit compare <branch>, gitit commits <branch>, gitit file <filename> <branch>
+#TODO: Files are defined relative to current path
+#TODO: Files are defined absolutely again if -a flag is passed
