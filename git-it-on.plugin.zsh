@@ -66,4 +66,4 @@ gitit() {
   elif [ $1 = "grep" ]; then git_grep $@
   fi
 }
-#TODO: Git open arbitrary branch
+#TODO: Gitit open arbitrary branch (gitit branch <branch>, gitit branch <branch> <filename>, gitit compare <branch>, gitit commits <branch>, gitit file <filename> <branch>
