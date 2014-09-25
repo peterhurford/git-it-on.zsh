@@ -27,7 +27,7 @@ echo "plugins+=(git-it-on)" >> ~/.zshrc
 If you're lame and use bash, you can install this directly to your `~/.bash_profile`:
 
 ```bash
-curl -s https://raw.githubusercontent.com/peterhurford/gi-it-on.zsh/master/git-it-on.plugin.zsh >> ~/.bash_profile
+curl -s https://raw.githubusercontent.com/peterhurford/git-it-on.zsh/master/git-it-on.plugin.zsh >> ~/.bash_profile
 ```````
 
 ## But why even leave vim for the command line?
