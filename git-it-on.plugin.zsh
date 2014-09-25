@@ -66,5 +66,4 @@ gitit() {
   elif [ $1 = "grep" ]; then git_grep $@
   fi
 }
-#TODO: Can open a file even if not in the root repo
 #TODO: Git open arbitrary branch

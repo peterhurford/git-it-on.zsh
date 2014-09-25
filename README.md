@@ -4,8 +4,9 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 
 *Git It On*, the plugin for zshell, comes in here.
 
-* `gitit repo` -- opens the repository to your current branch
+* `gitit repo` -- opens the base repository to your current branch
 * `gitit repo <folder>` -- opens that folder in your current branch
+* `gitit repo .` -- opens current folder in git at your current branch
 * `gitit compare` -- opens the compare file between your branch and master
 * `gitit commits` -- opens the commits for your current branch
 * `gitit file <filename>` -- opens the github page for the desired file
