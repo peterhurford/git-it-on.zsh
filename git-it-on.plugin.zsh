@@ -27,7 +27,12 @@ git_open_history() {
 }
 git_grep() {
   git_set_repo
-  url="$url/search?q=$1"
+  if [[ "${2}" == "${2% *}" ]] ; then
+    shift
+    url="$url/search?q=$@"
+  else
+    url="$url/search?q=\"$2\""
+  fi
   open $url
 }
 gitit() {
@@ -35,7 +40,7 @@ gitit() {
   elif [ $1 = "compare" ]; then git_open_compare
   elif [ $1 = "file" ]; then git_open_file $2
   elif [ $1 = "history" ]; then git_open_history $2
-  elif [ $1 = "grep" ]; then git_grep $2
+  elif [ $1 = "grep" ]; then git_grep $@
   fi
 }
 #TODO: Can open a file even if not in the root repo
