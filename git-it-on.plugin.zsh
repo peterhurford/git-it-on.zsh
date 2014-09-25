@@ -9,9 +9,22 @@ git_set_repo() {
 }
 git_open_file() {
   git_set_repo
-  echo $#
-  url="$url/blob/$branch/$1"
-  open $url
+  if [ "$1"="." ]; then
+    repo_name=${repo_url#*/}
+    repo_name=${repo_name%.*} 
+    dot_is_this=$PWD
+    i="0"
+    while [ $i -ne 1 ]; do
+      dot_is_this=${dot_is_this#*/}
+      if [ "${dot_is_this%%/*}" = "$repo_name" ]; then i="1"; fi
+    done
+    dot_is_this="${dot_is_this/$repo_name/}"
+    url="$url/blob/$branch/$dot_is_this"
+    open $url
+  else
+    url="$url/blob/$branch/$1"
+    open $url
+  fi
 }
 git_open_repo() {
   if [ "$#" -ne 1 ]; then
