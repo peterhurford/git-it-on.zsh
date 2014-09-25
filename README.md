@@ -39,13 +39,14 @@ You can make commands faster by using aliases.  Put the following in your `.zshr
 ```
 #Gitit Aliases
 alias repo="gitit repo"
-alias pr="gitit compare"  #gc is already taken
-alias gf="gitit file"
-alias gh="gitit history"
+alias compare="gitit compare"
+alias commits="gitit commits"
+alias file="gitit file"
+alias gistory="gitit history"
 alias gitgrep="gitit grep"
 ```
 
-Feel free to change the aliases to whatever you'd like.  Note that these aliases are not included by default.
+Feel free to change the aliases to whatever you'd like. You can even make them shorter, but the above is what I use.  Note that these aliases are not included by default.
 
 If you want more git-related aliases for making your git workflow faster, also look at my [Git-aliases.zsh](https://github.com/peterhurford/git-aliases.zsh) plugin.
 
