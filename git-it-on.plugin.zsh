@@ -25,6 +25,10 @@ git_open_compare() {
   git_set_repo
   open "$url/compare/$branch"
 }
+git_open_commits() {
+  git_set_repo
+  open "$url/commits/$branch"
+}
 git_open_history() {
   git_set_repo
   url="$url/commits/$branch/$1"
@@ -42,7 +46,8 @@ git_grep() {
 }
 gitit() {
   if [ $1 = "repo" ]; then git_open_repo $2
-  elif [ $1 = "compare" ]; then git_open_compare $2
+  elif [ $1 = "compare" ]; then git_open_compare
+  elif [ $1 = "commits" ]; then git_open_commits
   elif [ $1 = "file" ]; then git_open_file $2
   elif [ $1 = "history" ]; then git_open_history $2
   elif [ $1 = "grep" ]; then git_grep $@
