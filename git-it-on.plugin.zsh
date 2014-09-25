@@ -13,10 +13,8 @@ git_open_file() {
     repo_name=${repo_url#*/}
     repo_name=${repo_name%.*} 
     dot_is_this=$PWD
-    i="0"
-    while [ $i -ne 1 ]; do
+    while [ "${dot_is_this%%/*}" != "$repo_name" ]; do
       dot_is_this=${dot_is_this#*/}
-      if [ "${dot_is_this%%/*}" = "$repo_name" ]; then i="1"; fi
     done
     dot_is_this="${dot_is_this/$repo_name/}"
     url="$url/blob/$branch/$dot_is_this"
@@ -69,3 +67,4 @@ gitit() {
 #TODO: Gitit open arbitrary branch (gitit branch <branch>, gitit branch <branch> <filename>, gitit compare <branch>, gitit commits <branch>, gitit file <filename> <branch>
 #TODO: Files are defined relative to current path
 #TODO: Files are defined absolutely again if -a flag is passed
+#TODO: Repo . in root
