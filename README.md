@@ -17,6 +17,8 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 * `gitit file <filename> <branch>` -- opens the desired file on the chosen branch.
 * `gitit history <filename>` -- opens the github history page for the file.
 * `gitit history <filename> <branch>` -- opens the history page for the file on the chosen branch.
+* `gitit pulls` -- open the list of pull requests for the repo.
+* `gitit pulls <filters>` -- open the list of pull requests with filters (e.g., `is:open`, `author:peterhurford`)
 * `gitit grep <term>` -- opens the github search page for your term
 
 ## Installation
@@ -50,6 +52,8 @@ alias compare="gitit compare"
 alias commits="gitit commits"
 alias file="gitit file"
 alias gistory="gitit history"
+alias prs="gitit pulls"
+alias myprs="gitit pulls author:peterhurford" #put your name here
 alias gitgrep="gitit grep"
 ```
 

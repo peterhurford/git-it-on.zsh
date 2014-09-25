@@ -58,6 +58,14 @@ git_open_branch() {
   git_set_repo
   open "$url/tree/$1"
 }
+git_open_pulls() {
+  git_set_repo
+  shift
+  echo $#
+  echo $@
+  if [ "$#" -eq 0 ]; then open "$url/pulls"
+  else; open "$url/pulls?q=$@"; fi
+}
 git_grep() {
   git_set_repo
   if [[ "${2}" == "${2% *}" ]] ; then
@@ -75,6 +83,7 @@ gitit() {
   elif [ $1 = "file" ]; then git_open_file $2 $3
   elif [ $1 = "history" ]; then git_open_history $2 $3
   elif [ $1 = "branch" ]; then git_open_branch $2
+  elif [ $1 = "pulls" ]; then git_open_pulls $@
   elif [ $1 = "grep" ]; then git_grep $@
   fi
 }
