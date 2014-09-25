@@ -9,6 +9,7 @@ git_set_repo() {
 }
 git_open_file() {
   git_set_repo
+  if [ "$#" -eq 2 ]; then branch="$2"; fi
   if [[ "${1%.*}" == "." ]]; then
     repo_name=${repo_url#*/}
     repo_name=${repo_name%.*} 
@@ -40,16 +41,22 @@ git_open_repo() {
 }
 git_open_compare() {
   git_set_repo
+  if [ "$#" -ne 0 ]; then; branch="$1"; fi
   open "$url/compare/$branch"
 }
 git_open_commits() {
   git_set_repo
+  if [ "$#" -ne 0 ]; then; branch="$1"; fi
   open "$url/commits/$branch"
 }
 git_open_history() {
   git_set_repo
-  url="$url/commits/$branch/$1"
-  open $url
+  if [ "$#" -eq 2 ]; then branch="$2"; fi
+  open "$url/commits/$branch/$1"
+}
+git_open_branch() {
+  git_set_repo
+  open "$url/tree/$1"
 }
 git_grep() {
   git_set_repo
@@ -63,14 +70,18 @@ git_grep() {
 }
 gitit() {
   if [ $1 = "repo" ]; then git_open_repo $2
-  elif [ $1 = "compare" ]; then git_open_compare
-  elif [ $1 = "commits" ]; then git_open_commits
-  elif [ $1 = "file" ]; then git_open_file $2
-  elif [ $1 = "history" ]; then git_open_history $2
+  elif [ $1 = "compare" ]; then git_open_compare $2
+  elif [ $1 = "commits" ]; then git_open_commits $2
+  elif [ $1 = "file" ]; then git_open_file $2 $3
+  elif [ $1 = "history" ]; then git_open_history $2 $3
+  elif [ $1 = "branch" ]; then git_open_branch $2
   elif [ $1 = "grep" ]; then git_grep $@
   fi
 }
-#TODO: Gitit open arbitrary branch (gitit branch <branch>, gitit branch <branch> <filename>, gitit compare <branch>, gitit commits <branch>, gitit file <filename> <branch>
 #TODO: Gitit file works with relative paths.
 #TODO: Gitit repo is relative to the current folder by default.
 #TODO: Gitit file is relative to the current folder by default.
+#TODO: Complains about missing arguments.
+#TODO: Help on entering 'gitit' with no arguments or on entering 'gitit help'
+#TODO: Man page
+#TODO: Tab completion

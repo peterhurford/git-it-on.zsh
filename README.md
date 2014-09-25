@@ -8,10 +8,15 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 * `gitit repo <folder>` -- opens that folder in your current branch
 * `gitit repo .` -- opens current folder in GitHub at your current branch
 * `gitit repo ../` -- open one folder up in GitHub.  You can do relative paths.
+* `gitit branch <branch>` -- open the repo for a chosen branch.
 * `gitit compare` -- opens the compare file between your branch and master
+* `gitit compare <branch>` -- opens the compare file for a chosen branch.
 * `gitit commits` -- opens the commits for your current branch
+* `gitit commits <branch>` -- opens the commits for a chosen branch.
 * `gitit file <filename>` -- opens the github page for the desired file (use either a relative or absolute path).
-* `gitit history <filename>` -- opens the github history page for the file
+* `gitit file <filename> <branch>` -- opens the desired file on the chosen branch.
+* `gitit history <filename>` -- opens the github history page for the file.
+* `gitit history <filename> <branch>` -- opens the history page for the file on the chosen branch.
 * `gitit grep <term>` -- opens the github search page for your term
 
 ## Installation
