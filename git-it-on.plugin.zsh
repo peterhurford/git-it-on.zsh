@@ -7,18 +7,27 @@ git_set_repo() {
   url="${url/http@/http://}"
   url="${url/com:/com/}"
 }
-git_open_repo() {
-  git_set_repo
-  open "$url/tree/$branch"
-}
-git_open_compare() {
-  git_set_repo
-  open "$url/compare/$branch"
-}
 git_open_file() {
   git_set_repo
+  echo $#
   url="$url/blob/$branch/$1"
   open $url
+}
+git_open_repo() {
+  if [ "$#" -ne 1 ]; then
+    git_set_repo
+    open "$url/tree/$branch"
+  else
+    git_open_file $1
+  fi
+}
+git_open_compare() {
+  if [ "$#" -ne 1 ]; then
+    git_set_repo
+    open "$url/compare/$branch"
+  else
+    git_open_file $1
+  fi
 }
 git_open_history() {
   git_set_repo
@@ -36,13 +45,12 @@ git_grep() {
   open $url
 }
 gitit() {
-  if [ $1 = "repo" ]; then git_open_repo
-  elif [ $1 = "compare" ]; then git_open_compare
+  if [ $1 = "repo" ]; then git_open_repo $2
+  elif [ $1 = "compare" ]; then git_open_compare $2
   elif [ $1 = "file" ]; then git_open_file $2
   elif [ $1 = "history" ]; then git_open_history $2
   elif [ $1 = "grep" ]; then git_grep $@
   fi
 }
 #TODO: Can open a file even if not in the root repo
-#TODO: Git grep sends all arguments
 #TODO: Git open arbitrary branch

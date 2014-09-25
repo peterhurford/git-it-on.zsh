@@ -5,6 +5,7 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 *Git It On*, the plugin for zshell, comes in here.
 
 * `gitit repo` -- opens the repository to your current branch
+* `gitit repo <folder>` -- opens that folder in your current branch
 * `gitit compare` -- opens the compare file between your branch and master
 * `gitit file <filename>` -- opens the github page for the desired file
 * `gitit history <filename>` -- opens the github history page for the file
@@ -37,7 +38,7 @@ You can make commands faster by using aliases.  Put the following in your `.zshr
 ```
 #Gitit Aliases
 alias repo="gitit repo"
-alias pr="gitit compare"
+alias pr="gitit compare"  #gc is already taken
 alias gf="gitit file"
 alias gh="gitit history"
 alias gitgrep="gitit grep"
