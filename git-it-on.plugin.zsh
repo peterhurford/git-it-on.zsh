@@ -22,12 +22,8 @@ git_open_repo() {
   fi
 }
 git_open_compare() {
-  if [ "$#" -ne 1 ]; then
-    git_set_repo
-    open "$url/compare/$branch"
-  else
-    git_open_file $1
-  fi
+  git_set_repo
+  open "$url/compare/$branch"
 }
 git_open_history() {
   git_set_repo
