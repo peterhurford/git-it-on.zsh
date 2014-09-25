@@ -9,18 +9,24 @@ git_set_repo() {
 }
 git_open_file() {
   git_set_repo
-  if [ "$1"="." ]; then
+  if [[ "${1%.*}" == "." ]]; then
     repo_name=${repo_url#*/}
     repo_name=${repo_name%.*} 
-    dot_is_this=$PWD
+    if [ "$1" == "." ]; then
+      dot_is_this=$PWD
+    else
+      dot_is_this="$PWD/$1"
+    fi
     while [ "${dot_is_this%%/*}" != "$repo_name" ]; do
       dot_is_this=${dot_is_this#*/}
     done
     dot_is_this="${dot_is_this/$repo_name/}"
+    echo $dot_is_this
     url="$url/blob/$branch/$dot_is_this"
     open $url
   else
     url="$url/blob/$branch/$1"
+    echo $url
     open $url
   fi
 }
@@ -65,6 +71,6 @@ gitit() {
   fi
 }
 #TODO: Gitit open arbitrary branch (gitit branch <branch>, gitit branch <branch> <filename>, gitit compare <branch>, gitit commits <branch>, gitit file <filename> <branch>
-#TODO: Files are defined relative to current path
-#TODO: Files are defined absolutely again if -a flag is passed
-#TODO: Repo . in root
+#TODO: Gitit file works with relative paths.
+#TODO: Gitit repo is relative to the current folder by default.
+#TODO: Gitit file is relative to the current folder by default.
