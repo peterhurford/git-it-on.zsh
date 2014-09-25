@@ -11,21 +11,46 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 * `gitit grep <term>` -- opens the github search page for your term
 
 ## Installation
-TODO: Write Installation
 
+Assuming you have [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), you can simply write
+
+```bash
+git clone https://github.com/peterhurford/git-it-on.zsh ~/.oh-my-zsh/custom/plugins/git-it-on
+echo "plugins+=(git-it-on)" >> ~/.zshrc
+```
+
+(Alternatively, you can place the `git-it-on` plugin in the `plugins=(...)` local manually.)
+
+If you're lame and use bash, you can install this directly to your `~/.bash_profile`:
+
+```bash
+curl -s https://raw.githubusercontent.com/peterhurford/gi-it-on.zsh/master/git-it-on.plugin.zsh >> ~/.bash_profile
+```````
 
 ## But why even leave vim for the command line?
 TODO: Make and link vim companion plugin.
 
 
 ## These commands are too long, I want to be even faster!
-TODO: Explain aliasing.
+You can make commands faster by using aliases.  Put the following in your `.zshrc` (or `.bash_profile`)
+
+```
+#Gitit Aliases
+alias repo="gitit repo"
+alias pr="gitit compare"
+alias gf="gitit file"
+alias gh="gitit history"
+alias gitgrep="gitit grep"
+```
+
+Feel free to change the aliases to whatever you'd like.  Note that these aliases are not included by default.
+
+If you want more git-related aliases for making your git workflow faster, also look at my [Git-aliases.zsh](https://github.com/peterhurford/git-aliases.zsh) plugin.
 
 
-## If you like this, you might also like...
+## Got any more plugins to share?
 * [Send.zsh](https://github.com/robertzk/send.zsh), a git command by ro
 bertzk that combines `git add .`, `git commit -a -m`, and `git push ori
 gin <branch>`.
 * [Send.vim](https://github.com/peterhurford/send.vim), a vim plugin by
  me to do the above _without leaving vim_.
-* [Git-aliases.zsh](https://github.com/peterhurford/git-aliases.zsh), an omnibus of useful git aliases for speeding up the git workflow.
