@@ -22,12 +22,10 @@ git_open_file() {
       dot_is_this=${dot_is_this#*/}
     done
     dot_is_this="${dot_is_this/$repo_name/}"
-    echo $dot_is_this
     url="$url/blob/$branch/$dot_is_this"
     open $url
   else
     url="$url/blob/$branch/$1"
-    echo $url
     open $url
   fi
 }
@@ -61,8 +59,6 @@ git_open_branch() {
 git_open_pulls() {
   git_set_repo
   shift
-  echo $#
-  echo $@
   if [ "$#" -eq 0 ]; then open "$url/pulls"
   else; open "$url/pulls?q=$@"; fi
 }
@@ -87,6 +83,8 @@ gitit() {
   elif [ $1 = "grep" ]; then git_grep $@
   fi
 }
+#TODO: Fix `pr` alias.
+#TODO: Open pull request by number.
 #TODO: Gitit file works with relative paths.
 #TODO: Gitit repo is relative to the current folder by default.
 #TODO: Gitit file is relative to the current folder by default.
