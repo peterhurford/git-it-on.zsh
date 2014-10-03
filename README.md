@@ -20,6 +20,8 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 * `gitit pulls` -- open the list of pull requests for the repo.
 * `gitit pulls <filters>` -- open the list of pull requests with filters (e.g., `is:open`, `author:peterhurford`)
 * `gitit grep <term>` -- opens the github search page for your term
+* `gitit ctrlp` -- opens the github file finder for master branch
+* `giti ctrlp <branch>` -- opens the github file finder for your desired branch
 
 ## Installation
 
@@ -55,6 +57,7 @@ alias gistory="gitit history"
 alias prs="gitit pulls"
 alias myprs="gitit pulls author:peterhurford" #put your name here
 alias gitgrep="gitit grep"
+alias ctrlp="gitit ctrlp"
 ```
 
 Feel free to change the aliases to whatever you'd like. You can even make them shorter, but the above is what I use.  Note that these aliases are not included by default.

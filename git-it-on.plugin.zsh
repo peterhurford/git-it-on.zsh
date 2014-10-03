@@ -72,6 +72,12 @@ git_grep() {
   fi
   open $url
 }
+git_ctrlp() {
+  git_set_repo
+  if [ "$#" -eq 0 ]; then branch="master"
+  else; branch=$1; fi
+  open "$url/find/$branch"
+}
 gitit() {
   if [ $1 = "repo" ]; then git_open_repo $2
   elif [ $1 = "compare" ]; then git_open_compare $2
@@ -81,9 +87,9 @@ gitit() {
   elif [ $1 = "branch" ]; then git_open_branch $2
   elif [ $1 = "pulls" ]; then git_open_pulls $@
   elif [ $1 = "grep" ]; then git_grep $@
+  elif [ $1 = "ctrlp" ]; then git_ctrlp $2
   fi
 }
-#TODO: Fix `pr` alias.
 #TODO: Open pull request by number.
 #TODO: Gitit file works with relative paths.
 #TODO: Gitit repo is relative to the current folder by default.
@@ -92,3 +98,4 @@ gitit() {
 #TODO: Help on entering 'gitit' with no arguments or on entering 'gitit help'
 #TODO: Man page
 #TODO: Tab completion
+#TODO: Vim integration
