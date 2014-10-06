@@ -53,6 +53,7 @@ alias repo="gitit repo"
 alias compare="gitit compare"
 alias commits="gitit commits"
 alias file="gitit file"
+alias branch="gitit branch"
 alias gistory="gitit history"
 alias prs="gitit pulls"
 alias myprs="gitit pulls author:peterhurford" #put your name here
