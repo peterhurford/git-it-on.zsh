@@ -30,8 +30,10 @@ git_open_file() {
   fi
 }
 git_open_repo() {
-  if [ "$#" -ne 1 ]; then
-    git_set_repo
+  git_set_repo
+  if [ "$#" -eq 3 ]; then
+    open "http://www.github.com/$2/$3"   
+  elif [ "$#" -eq 2 ]; then
     open "$url/tree/$branch"
   else
     git_open_file $1
@@ -79,7 +81,7 @@ git_ctrlp() {
   open "$url/find/$branch"
 }
 gitit() {
-  if [ $1 = "repo" ]; then git_open_repo $2
+  if [ $1 = "repo" ]; then git_open_repo $@
   elif [ $1 = "compare" ]; then git_open_compare $2
   elif [ $1 = "commits" ]; then git_open_commits $2
   elif [ $1 = "file" ]; then git_open_file $2 $3
