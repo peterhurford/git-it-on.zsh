@@ -22,6 +22,7 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 * `gitit history <filename> <branch>` -- opens the history page for the file on the chosen branch.
 * `gitit pulls` -- open the list of pull requests for the repo.
 * `gitit pulls <filters>` -- open the list of pull requests with filters (e.g., `is:open`, `author:peterhurford`)
+* `gitit pulls <number>` -- open the pull request for that number.
 * `gitit grep <term>` -- opens the github search page for your term
 * `gitit ctrlp` -- opens the github file finder for master branch
 * `giti ctrlp <branch>` -- opens the github file finder for your desired branch

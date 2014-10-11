@@ -62,6 +62,7 @@ git_open_pulls() {
   git_set_repo
   shift
   if [ "$#" -eq 0 ]; then open "$url/pulls"
+  elif [ $1 -ge 0 2>/dev/null ]; then open "$url/pull/$1"
   else; open "$url/pulls?q=$@"; fi
 }
 git_grep() {
