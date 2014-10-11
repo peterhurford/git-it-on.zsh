@@ -53,6 +53,7 @@ You can make commands faster by using aliases.  Put the following in your `.zshr
 ```
 #Gitit Aliases
 alias repo="gitit repo"
+alias myrepos="gitit repo peterhurford" #put your name here (usage: `myrepos <reponame>` to open up your repo.)
 alias compare="gitit compare"
 alias commits="gitit commits"
 alias file="gitit file"
