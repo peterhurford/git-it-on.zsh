@@ -93,12 +93,3 @@ gitit() {
   elif [ $1 = "ctrlp" ]; then git_ctrlp $2
   fi
 }
-#TODO: Open pull request by number.
-#TODO: Gitit file works with relative paths.
-#TODO: Gitit repo is relative to the current folder by default.
-#TODO: Gitit file is relative to the current folder by default.
-#TODO: Complains about missing arguments.
-#TODO: Help on entering 'gitit' with no arguments or on entering 'gitit help'
-#TODO: Man page
-#TODO: Tab completion
-#TODO: Vim integration
