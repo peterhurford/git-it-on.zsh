@@ -10,7 +10,9 @@ git_set_repo() {
 git_open_file() {
   git_set_repo
   if [ "$#" -eq 2 ]; then branch="$2"; fi
-  if [[ "${1%.*}" == "." ]]; then
+  echo $1
+  echo ${1%.}
+  if [[ "${1%.*}" == "." ]] || [ "$1" == "." ]; then
     repo_name=${repo_url#*/}
     repo_name=${repo_name%.*} 
     if [ "$1" == "." ]; then
@@ -21,8 +23,10 @@ git_open_file() {
     while [ "${dot_is_this%%/*}" != "$repo_name" ]; do
       dot_is_this=${dot_is_this#*/}
     done
+    echo $dot_is_this
     dot_is_this="${dot_is_this/$repo_name/}"
     url="$url/blob/$branch/$dot_is_this"
+    echo $url
     open $url
   else
     url="$url/blob/$branch/$1"
@@ -30,10 +34,11 @@ git_open_file() {
   fi
 }
 git_open_repo() {
+  shift
   git_set_repo
-  if [ "$#" -eq 3 ]; then
-    open "http://www.github.com/$2/$3"   
-  elif [ "$#" -eq 2 ]; then
+  if [ "$#" -eq 2 ]; then
+    open "http://www.github.com/$1/$2"   
+  elif [ "$#" -eq 0 ]; then
     open "$url/tree/$branch"
   else
     git_open_file $1
