@@ -4,7 +4,6 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 
 *Git It On*, the plugin for zshell, comes in here.
 
-*Note:* This plugin is stable, but still in active development.  I do not yet consider this plugin finished.
 
 * `gitit repo` -- opens the base repository to your current branch
 * `gitit repo <folder>` -- opens that folder in your current branch
@@ -28,6 +27,10 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 * `giti ctrlp <branch>` -- opens the github file finder for your desired branch
 
 ## Installation
+
+*Note:* This plugin is stable, but still in active development.  I do not yet consider this plugin finished.
+
+*Note:* Due to the reliance on `open`, this plugin will work only for Macs.
 
 Assuming you have [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), you can simply write
 
