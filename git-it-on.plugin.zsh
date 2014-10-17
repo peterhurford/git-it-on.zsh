@@ -10,8 +10,6 @@ git_set_repo() {
 git_open_file() {
   git_set_repo
   if [ "$#" -eq 2 ]; then branch="$2"; fi
-  echo $1
-  echo ${1%.}
   if [[ "${1%.*}" == "." ]] || [ "$1" == "." ]; then
     repo_name=${repo_url#*/}
     repo_name=${repo_name%.*} 
@@ -23,10 +21,8 @@ git_open_file() {
     while [ "${dot_is_this%%/*}" != "$repo_name" ]; do
       dot_is_this=${dot_is_this#*/}
     done
-    echo $dot_is_this
     dot_is_this="${dot_is_this/$repo_name/}"
     url="$url/blob/$branch/$dot_is_this"
-    echo $url
     open $url
   else
     url="$url/blob/$branch/$1"
