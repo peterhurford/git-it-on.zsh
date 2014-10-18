@@ -6,9 +6,7 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 
 
 * `gitit repo` -- opens the base repository to your current branch
-* `gitit repo <folder>` -- opens that folder in your current branch
-* `gitit repo .` -- opens current folder in GitHub at your current branch
-* `gitit repo ../` -- open one folder up in GitHub.  You can do relative paths.
+* `gitit repo <folder or file>` -- opens that folder in your current branch (paths are relative)
 * `gitit repo <username> <reponame>` -- opens up the specified repository.
 * `gitit branch <branch>` -- open the repo for a chosen branch.
 * `gitit compare` -- opens the compare file between your branch and master
