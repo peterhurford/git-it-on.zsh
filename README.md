@@ -8,25 +8,6 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 * `gitit <folder or file>` -- opens that folder in your current branch (paths are relative)
 
 
-## That's cool... What else?
-
-* `gitit <folder or file> <branch>` -- opens that folder on the specified branch.
-* `gitit repo <username> <reponame>` -- opens up the specified repository.
-* `gitit branch <branch>` -- open the repo for a chosen branch.
-* `gitit compare` -- opens the compare file between your branch and master
-* `gitit compare <branch>` -- opens the compare file for a chosen branch (compared with master).
-* `gitit commits` -- opens the commits for your current branch
-* `gitit commits <branch>` -- opens the commits for a chosen branch.
-* `gitit history <filename>` -- opens the github history page for the file.
-* `gitit history <filename> <branch>` -- opens the history page for the file on the chosen branch.
-* `gitit pulls` -- open the list of pull requests for the repo.
-* `gitit pulls <filters>` -- open the list of pull requests with filters (e.g., `is:open`, `author:peterhurford`)
-* `gitit pulls <number>` -- open the pull request for that number.
-* `gitit grep <term>` -- opens the github search page for your term
-* `gitit ctrlp` -- opens the github file finder for master branch (note that you cannot pass search terms directly from the command line)
-* `giti ctrlp <branch>` -- opens the github file finder for your desired branch
-
-
 ## Installation
 
 *Note:* This plugin is stable, but still in active development.  I do not yet consider this plugin finished.
@@ -47,6 +28,25 @@ If you're lame and use bash, you can install this directly to your `~/.bash_prof
 ```bash
 curl -s https://raw.githubusercontent.com/peterhurford/git-it-on.zsh/master/git-it-on.plugin.zsh >> ~/.bash_profile
 ```````
+
+
+## That's cool... What else?
+
+* `gitit <folder or file> <branch>` -- opens that folder on the specified branch.
+* `gitit repo <username> <reponame>` -- opens up the specified repository.
+* `gitit branch <branch>` -- open the repo for a chosen branch.
+* `gitit compare` -- opens the compare file between your branch and master
+* `gitit compare <branch>` -- opens the compare file for a chosen branch (compared with master).
+* `gitit commits` -- opens the commits for your current branch
+* `gitit commits <branch>` -- opens the commits for a chosen branch.
+* `gitit history <filename>` -- opens the github history page for the file.
+* `gitit history <filename> <branch>` -- opens the history page for the file on the chosen branch.
+* `gitit pulls` -- open the list of pull requests for the repo.
+* `gitit pulls <filters>` -- open the list of pull requests with filters (e.g., `is:open`, `author:peterhurford`)
+* `gitit pulls <number>` -- open the pull request for that number.
+* `gitit grep <term>` -- opens the github search page for your term
+* `gitit ctrlp` -- opens the github file finder for master branch (note that you cannot pass search terms directly from the command line)
+* `giti ctrlp <branch>` -- opens the github file finder for your desired branch
 
 
 ## But why even leave vim for the command line?
