@@ -1,6 +1,6 @@
 git_set_repo() {
-  repo_url=`git config --get remote.origin.url`
-  branch=`git rev-parse --abbrev-ref HEAD`
+  repo_url=$(git config --get remote.origin.url)
+  branch=$(git rev-parse --abbrev-ref HEAD)
   url="${repo_url/git/http}"
   url="${url/httphub/github}"
   url="${url/.git//}"
@@ -11,7 +11,7 @@ git_set_repo() {
 git_open_file() {
   git_set_repo
   if [ "$#" -eq 2 ]; then branch="$2"; fi
-  local file=$(echo "`cd $1; pwd`" | cut -c "$((1+${#$(git rev-parse --show-toplevel)}))-")
+  local file=$(echo "$(cd $1; pwd)" | cut -c "$((1+${#$(git rev-parse --show-toplevel)}))-")
   url="$url/blob/$branch$file"
   open $url
 }
