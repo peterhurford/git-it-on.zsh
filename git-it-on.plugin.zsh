@@ -57,7 +57,8 @@ git_open_history() {
 }
 git_open_branch() {
   git_set_repo
-  open "$url/tree/$1"
+  if [ "$#" -eq 0 ]; then git_open_repo "repo"
+  else; open "$url/tree/$1"; fi
 }
 git_open_pulls() {
   git_set_repo
