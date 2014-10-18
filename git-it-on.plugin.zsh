@@ -11,24 +11,9 @@ git_set_repo() {
 git_open_file() {
   git_set_repo
   if [ "$#" -eq 2 ]; then branch="$2"; fi
-  if [[ "${1%.*}" == "." ]] || [ "$1" == "." ]; then
-    repo_name=${repo_url#*/}
-    repo_name=${repo_name%.*} 
-    if [ "$1" == "." ]; then
-      dot_is_this=$PWD
-    else
-      dot_is_this="$PWD/$1"
-    fi
-    while [ "${dot_is_this%%/*}" != "$repo_name" ]; do
-      dot_is_this=${dot_is_this#*/}
-    done
-    dot_is_this="${dot_is_this/$repo_name/}"
-    url="$url/blob/$branch/$dot_is_this"
-    open $url
-  else
-    url="$url/blob/$branch/$1"
-    open $url
-  fi
+  local file=$(echo "`cd $1; pwd`" | cut -c "$((1+${#$(git rev-parse --show-toplevel)}))-")
+  url="$url/blob/$branch$file"
+  open $url
 }
 git_open_repo() {
   shift
