@@ -23,7 +23,7 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 * `gitit pulls <filters>` -- open the list of pull requests with filters (e.g., `is:open`, `author:peterhurford`)
 * `gitit pulls <number>` -- open the pull request for that number.
 * `gitit grep <term>` -- opens the github search page for your term
-* `gitit ctrlp` -- opens the github file finder for master branch
+* `gitit ctrlp` -- opens the github file finder for master branch (note that you cannot pass search terms directly from the command line)
 * `giti ctrlp <branch>` -- opens the github file finder for your desired branch
 
 ## Installation
