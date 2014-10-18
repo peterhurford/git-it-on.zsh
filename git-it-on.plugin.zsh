@@ -11,8 +11,10 @@ git_set_repo() {
 git_open_file() {
   git_set_repo
   if [ "$#" -eq 2 ]; then branch="$2"; fi
-  local file=$(echo "$(cd $1; pwd)" | cut -c "$((1+${#$(git rev-parse --show-toplevel)}))-")
+  if [[ -d $1 ]]; then; local zone=$1; else; local zone="."; fi
+  local file=$(echo "$(cd $zone; pwd)" | cut -c "$((1+${#$(git rev-parse --show-toplevel)}))-")
   url="$url/blob/$branch$file"
+  if [[ -d $1 ]]; then; url=$url; else; url="$url/$1"; fi
   open $url
 }
 git_open_repo() {
