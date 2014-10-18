@@ -17,17 +17,6 @@ git_open_file() {
   if [[ -d $1 ]]; then; url=$url; else; url="$url/$1"; fi
   open $url
 }
-git_open_repo() {
-  shift
-  git_set_repo
-  if [ "$#" -eq 2 ]; then
-    open "http://www.github.com/$1/$2"   
-  elif [ "$#" -eq 0 ]; then
-    open "$url/tree/$branch"
-  else
-    git_open_file $1
-  fi
-}
 git_open_compare() {
   git_set_repo
   if [ "$#" -ne 0 ]; then; branch="$1"; fi
@@ -45,7 +34,7 @@ git_open_history() {
 }
 git_open_branch() {
   git_set_repo
-  if [ "$#" -eq 0 ]; then git_open_repo "repo"
+  if [ "$#" -eq 0 ]; then git_open_file
   else; open "$url/tree/$1"; fi
 }
 git_open_pulls() {
@@ -71,15 +60,20 @@ git_ctrlp() {
   else; branch=$1; fi
   open "$url/find/$branch"
 }
+git_open_repo() {
+  if [ "$#" -eq 2 ]; then open "http://www.github.com/$1/$2"
+  else; git_open_file $1; fi
+}
 gitit() {
-  if [ $1 = "repo" ]; then git_open_repo $@
+  if [ $# -eq 0 ]; then git_open_file
   elif [ $1 = "compare" ]; then git_open_compare $2
   elif [ $1 = "commits" ]; then git_open_commits $2
-  elif [ $1 = "file" ]; then git_open_file $2 $3
   elif [ $1 = "history" ]; then git_open_history $2 $3
   elif [ $1 = "branch" ]; then git_open_branch $2
   elif [ $1 = "pulls" ]; then git_open_pulls $@
   elif [ $1 = "grep" ]; then git_grep $@
   elif [ $1 = "ctrlp" ]; then git_ctrlp $2
+  elif [ $1 = "repo" ]; then git_open_repo $2 $3
+  else git_open_file $1 $2
   fi
 }

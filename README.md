@@ -4,17 +4,19 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 
 *Git It On*, the plugin for zshell, comes in here.
 
+* `gitit` -- open your current folder, on your current branch, in GitHub
+* `gitit <folder or file>` -- opens that folder in your current branch (paths are relative)
 
-* `gitit repo` -- opens the base repository to your current branch
-* `gitit repo <folder or file>` -- opens that folder in your current branch (paths are relative)
+
+## That's cool... What else?
+
+* `gitit <folder or file> <branch>` -- opens that folder on the specified branch.
 * `gitit repo <username> <reponame>` -- opens up the specified repository.
 * `gitit branch <branch>` -- open the repo for a chosen branch.
 * `gitit compare` -- opens the compare file between your branch and master
-* `gitit compare <branch>` -- opens the compare file for a chosen branch.
+* `gitit compare <branch>` -- opens the compare file for a chosen branch (compared with master).
 * `gitit commits` -- opens the commits for your current branch
 * `gitit commits <branch>` -- opens the commits for a chosen branch.
-* `gitit file <filename>` -- opens the github page for the desired file (use either a relative or absolute path).
-* `gitit file <filename> <branch>` -- opens the desired file on the chosen branch.
 * `gitit history <filename>` -- opens the github history page for the file.
 * `gitit history <filename> <branch>` -- opens the history page for the file on the chosen branch.
 * `gitit pulls` -- open the list of pull requests for the repo.
@@ -23,6 +25,7 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 * `gitit grep <term>` -- opens the github search page for your term
 * `gitit ctrlp` -- opens the github file finder for master branch (note that you cannot pass search terms directly from the command line)
 * `giti ctrlp <branch>` -- opens the github file finder for your desired branch
+
 
 ## Installation
 
