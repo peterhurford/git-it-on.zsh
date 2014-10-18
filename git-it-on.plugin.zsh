@@ -6,6 +6,7 @@ git_set_repo() {
   url="${url/.git//}"
   url="${url/http@/http://}"
   url="${url/com:/com/}"
+  url="${url%/*}"
 }
 git_open_file() {
   git_set_repo
