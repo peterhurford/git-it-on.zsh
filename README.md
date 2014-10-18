@@ -29,6 +29,8 @@ If you're lame and use bash, you can install this directly to your `~/.bash_prof
 curl -s https://raw.githubusercontent.com/peterhurford/git-it-on.zsh/master/git-it-on.plugin.zsh >> ~/.bash_profile
 ```````
 
+![Train Divider](http://i.imgur.com/aZKcadZ.gif)
+
 
 ## That's cool... What else?
 
