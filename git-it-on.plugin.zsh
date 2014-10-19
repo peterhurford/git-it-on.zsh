@@ -8,13 +8,20 @@ git_set_repo() {
   url="${url/com:/com/}"
   url="${url%/*}"
 }
+git_file_warn() {
+  if [ -d $1 ]; then git_open_file $1 $2
+    else if [ -f $1 ]; then git_open_file $1 $2
+      else echo "$1 does not exist."; echo ""; git_help
+    fi
+  fi
+}
 git_open_file() {
   git_set_repo
   if [ "$#" -eq 2 ]; then branch="$2"; fi
-  if [[ -d $1 ]]; then; local zone=$1; else; local zone="."; fi
+  if [ -d $1 ]; then; local zone=$1; else; local zone="."; fi
   local file=$(echo "$(cd $zone; pwd)" | cut -c "$((1+${#$(git rev-parse --show-toplevel)}))-")
   url="$url/blob/$branch$file"
-  if [[ -d $1 ]]; then; url=$url; else; url="$url/$1"; fi
+  if [ -d $1 ]; then; url=$url; else; url="$url/$1"; fi
   open $url
 }
 git_open_compare() {
@@ -72,7 +79,7 @@ git_help() {
   echo '* For more, visit https://github.com/peterhurford/git-it-on.zsh or type `gitit repo peterhurford git-it-on.zsh`'
 }
 gitit() {
-  if [ $# -eq 0 ]; then git_open_file
+  if [ $# -eq 0 ]; then git_file_warn
   elif [ $1 = "compare" ]; then git_open_compare $2
   elif [ $1 = "commits" ]; then git_open_commits $2
   elif [ $1 = "history" ]; then git_open_history $2 $3
@@ -82,6 +89,6 @@ gitit() {
   elif [ $1 = "ctrlp" ]; then git_ctrlp $2
   elif [ $1 = "repo" ]; then git_open_repo $2 $3
   elif [ $1 = "help" ]; then git_help
-  else git_open_file $1 $2
+  else git_file_warn $1 $2
   fi
 }
