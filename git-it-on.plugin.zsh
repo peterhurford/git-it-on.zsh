@@ -64,6 +64,13 @@ git_open_repo() {
   if [ "$#" -eq 2 ]; then open "http://www.github.com/$1/$2"
   else; git_open_file $1; fi
 }
+git_help() {
+  echo 'GIT IT ON'
+  echo '============='
+  echo '* `gitit` -- open your current folder, on your current branch, in GitHub.'
+  echo '* `gitit <folder or file>` -- open that folder in your current branch (paths are relative).'
+  echo '* For more, visit https://github.com/peterhurford/git-it-on.zsh or type `gitit repo peterhurford git-it-on.zsh`'
+}
 gitit() {
   if [ $# -eq 0 ]; then git_open_file
   elif [ $1 = "compare" ]; then git_open_compare $2
@@ -74,6 +81,7 @@ gitit() {
   elif [ $1 = "grep" ]; then git_grep $@
   elif [ $1 = "ctrlp" ]; then git_ctrlp $2
   elif [ $1 = "repo" ]; then git_open_repo $2 $3
+  elif [ $1 = "help" ]; then git_help
   else git_open_file $1 $2
   fi
 }
