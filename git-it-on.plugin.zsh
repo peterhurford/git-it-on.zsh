@@ -17,9 +17,9 @@ git_open_file() {
     return
   fi
   if [ "$#" -eq 2 ]; then branch="$2"; fi
-  if [ -d $1 ]; then; local zone=$1; else; local zone="."; fi
-  local file=$(echo "$(cd $zone; pwd)" | cut -c "$((1+${#$(git rev-parse --show-toplevel)}))-")
-  url="$url/blob/$branch$file"
+  if [ -d $1 ]; then; local cdtohere=$1; local zone='tree'; else; local cdtohere="."; local zone='blob'; fi
+  local file=$(echo "$(cd $cdtohere; pwd)" | cut -c "$((1+${#$(git rev-parse --show-toplevel)}))-")
+  url="$url/$zone/$branch$file"
   if [ -d $1 ]; then; url=$url; else; url="$url/$1"; fi
   open $url
 }
