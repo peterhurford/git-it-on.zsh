@@ -16,6 +16,7 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 
 -
 
+### Oh-My-ZSH
 Assuming you have [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), you can simply write
 
 ```bash
@@ -26,7 +27,10 @@ echo "plugins+=(git-it-on)" >> ~/.zshrc
 (Alternatively, you can place the `git-it-on` plugin in the `plugins=(...)` local manually.)
 
 -
+### Antigen
+Add `antigen bundle peterhurford/git-it-on.zsh` to your `.zshrc` wherever you're adding the other antigen bundles.
 
+### Bash
 If you're lame and use bash, you can install this directly to your `~/.bash_profile`:
 
 ```bash
