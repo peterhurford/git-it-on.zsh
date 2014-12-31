@@ -12,7 +12,7 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 
 *Note:* This plugin is stable, but still in active development.  I do not yet consider this plugin finished.
 
-*Note:* Due to the reliance on `open`, this plugin will work only for Macs.
+*Note:* This was built on a Mac.  Support for Linux is experimental, and has not been tested by the plugin author.
 
 -
 
