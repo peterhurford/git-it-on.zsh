@@ -1,3 +1,12 @@
+#!/bin/zsh
+_open() {
+  # from https://github.com/caarlos0/zsh-open-pr
+  if [ "$(uname -s)" = "Darwin" ]; then
+    open "$1" 2> /dev/null
+  else
+    xdg-open "$1" &> /dev/null
+  fi
+}
 git_set_repo() {
   repo_url=$(git config --get remote.origin.url)
   branch=$(git rev-parse --abbrev-ref HEAD)
