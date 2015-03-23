@@ -18,9 +18,7 @@ git_set_repo() {
 }
 git_open_file() {
   git_set_repo
-  if [ -d $1 ]; then;
-  elif [ -f $1 ]; then;
-  else
+  if [ ! -f $1 ]; then
     echo "$1 does not exist"; echo ""; git_help
     return
   fi
