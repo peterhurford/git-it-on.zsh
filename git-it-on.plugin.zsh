@@ -22,7 +22,7 @@ git_set_repo() {
 
 git_open_file() {
   git_set_repo
-  if [ ! -f $1 ]; then
+  if [ ! -f $1 ] && [ ! -d $1 ]; then
     echo "$1 does not exist"; echo ""; git_help
     return
   fi
