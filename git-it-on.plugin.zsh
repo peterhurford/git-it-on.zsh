@@ -1,5 +1,5 @@
 #!/bin/zsh
-_open() {
+__open() {
   if [ "$(uname -s)" = "Darwin" ]; then
     open "$1" 2> /dev/null
   else
@@ -27,34 +27,34 @@ git_open_file() {
   local file=$(echo "$(cd $cdtohere; pwd)" | cut -c "$((1+${#$(git rev-parse --show-toplevel)}))-")
   url="$url/$zone/$branch$file"
   if [ -d $1 ]; then; url=$url; else; url="$url/$1"; fi
-  _open $url
+  __open $url
 }
 git_open_compare() {
   git_set_repo
   if [ "$#" -ne 0 ]; then; branch="$1"; fi
-  _open "$url/compare/$branch"
+  __open "$url/compare/$branch"
 }
 git_open_commits() {
   git_set_repo
   if [ "$#" -ne 0 ]; then; branch="$1"; fi
-  _open "$url/commits/$branch"
+  __open "$url/commits/$branch"
 }
 git_open_history() {
   git_set_repo
   if [ "$#" -eq 2 ]; then branch="$2"; fi
-  _open "$url/commits/$branch/$1"
+  __open "$url/commits/$branch/$1"
 }
 git_open_branch() {
   git_set_repo
   if [ "$#" -eq 0 ]; then git_open_file
-  else; _open "$url/tree/$1"; fi
+  else; __open "$url/tree/$1"; fi
 }
 git_open_pulls() {
   git_set_repo
   shift
-  if [ "$#" -eq 0 ]; then _open "$url/pulls"
-  elif [ $1 -ge 0 2>/dev/null ]; then _open "$url/pull/$1"
-  else; _open "$url/pulls?q=$@"; fi
+  if [ "$#" -eq 0 ]; then __open "$url/pulls"
+  elif [ $1 -ge 0 2>/dev/null ]; then __open "$url/pull/$1"
+  else; __open "$url/pulls?q=$@"; fi
 }
 git_grep() {
   git_set_repo
@@ -64,16 +64,16 @@ git_grep() {
   else
     url="$url/search?q=\"$2\""
   fi
-  _open $url
+  __open $url
 }
 git_ctrlp() {
   git_set_repo
   if [ "$#" -eq 0 ]; then branch="master"
   else; branch=$1; fi
-  _open "$url/find/$branch"
+  __open "$url/find/$branch"
 }
 git_open_repo() {
-  if [ "$#" -eq 2 ]; then _open "http://www.github.com/$1/$2"
+  if [ "$#" -eq 2 ]; then __open "http://www.github.com/$1/$2"
   else; git_open_file $1; fi
 }
 git_help() {
