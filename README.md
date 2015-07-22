@@ -54,6 +54,10 @@ curl -s https://raw.githubusercontent.com/peterhurford/git-it-on.zsh/master/git-
 * `gitit pulls` -- open the list of pull requests for the repo.
 * `gitit pulls <filters>` -- open the list of pull requests with filters (e.g., `is:open`, `author:peterhurford`)
 * `gitit pulls <number>` -- open the pull request for that number.
+* `gitit branches all` -- open up a list of all the branches in the repo.
+* `gitit branches active` -- open up a list of active branches.
+* `gitit branches stale` -- open up a list of stale branches.
+* `gitit branches mine` -- open up a list of your branches.
 * `gitit grep <term>` -- opens the github search page for your term
 * `gitit ctrlp` -- opens the github file finder for master branch (note that you cannot pass search terms directly from the command line)
 * `giti ctrlp <branch>` -- opens the github file finder for your desired branch
@@ -75,6 +79,7 @@ alias branch="gitit branch"
 alias gistory="gitit history"
 alias prs="gitit pulls"
 alias myprs="gitit pulls author:peterhurford" #put your name here
+alias mybranches="gitit branches mine"
 alias gitgrep="gitit grep"
 alias ctrlp="gitit ctrlp"
 ```

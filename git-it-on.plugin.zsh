@@ -86,6 +86,19 @@ git_open_branch() {
 }
 
 
+git_branches() {
+  git_set_repo
+  if [ "$#" -eq 0 ]; then
+    local loc="active"
+  elif [ "$1" = "mine" ]; then
+    local loc="yours"
+  else
+    local loc=$1  # active, stale, all
+  fi
+  __open "$url/branches/$loc"
+}
+
+
 git_open_pulls() {
   git_set_repo
   shift
@@ -146,6 +159,7 @@ gitit() {
   elif [ $1 = "commits" ]; then git_open_commits $2
   elif [ $1 = "history" ]; then git_open_history $2 $3
   elif [ $1 = "branch" ]; then git_open_branch $2
+  elif [ $1 = "branches" ]; then git_branches $2
   elif [ $1 = "pulls" ]; then git_open_pulls $@
   elif [ $1 = "grep" ]; then git_grep $@
   elif [ $1 = "ctrlp" ]; then git_ctrlp $2
