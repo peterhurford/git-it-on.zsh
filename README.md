@@ -30,6 +30,9 @@ echo "plugins+=(git-it-on)" >> ~/.zshrc
 ### Antigen
 Add `antigen bundle peterhurford/git-it-on.zsh` to your `.zshrc` wherever you're adding the other antigen bundles.
 
+### Zgen
+If you’re using [Zgen](https://github.com/tarjoilija/zgen), add `zgen load peterhurford/git-it-on.zsh` to your `.zshrc` wherever you're adding your other zgen plugins.
+
 ### Bash
 If you're lame and use bash, you can install this directly to your `~/.bash_profile`:
 
