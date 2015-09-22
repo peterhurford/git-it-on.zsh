@@ -11,10 +11,10 @@ __open() {
 git_set_repo() {
   repo_url=$(git config --get remote.origin.url)
   branch=$(git rev-parse --abbrev-ref HEAD)
-  url="${repo_url/git/http}"
-  url="${url/httphub/github}"
+  url="${repo_url/git/https}"
+  url="${url/httpshub/github}"
   url="${url/.git//}"
-  url="${url/http@/http://}"
+  url="${url/https@/https://}"
   url="${url/com:/com/}"
   url="${url%/*}"
 }
