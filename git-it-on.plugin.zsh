@@ -21,9 +21,10 @@ git_set_repo() {
 
 
 git_open_file() {
+  file_path="$1"
   git_set_repo
-  if [ ! -f $1 ] && [ ! -d $1 ]; then
-    echo "$1 does not exist"; echo ""; git_help
+  if [ ! -f $file_path ] && [ ! -d $file_path ]; then
+    echo "$file_path does not exist"; echo ""; git_help
     return
   fi
 
@@ -68,20 +69,22 @@ git_open_commits() {
 
 
 git_open_history() {
+  file_name="$1"
   git_set_repo
   if [ "$#" -eq 2 ]; then
     branch="$2"
   fi
-  __open "$url/commits/$branch/$1"
+  __open "$url/commits/$branch/$file_name"
 }
 
 
 git_open_branch() {
+  branch_name="$1"
   git_set_repo
   if [ "$#" -eq 0 ]; then
     git_open_file
   else
-    __open "$url/tree/$1"
+    __open "$url/tree/$branch_name"
   fi
 }
 
@@ -137,7 +140,9 @@ git_ctrlp() {
 
 git_open_repo() {
   if [ "$#" -eq 2 ]; then
-    __open "http://www.github.com/$1/$2"
+    username="$1"
+    reponame="$2"
+    __open "http://www.github.com/$username/$reponame"
   else
     git_open_file $1
   fi
@@ -154,18 +159,18 @@ git_help() {
 
 
 gitit() {
+  gitit_command="$1"
   if [ $# -eq 0 ]; then git_open_file
-  elif [ $1 = "compare" ]; then git_open_compare $2
-  elif [ $1 = "commits" ]; then git_open_commits $2
-  elif [ $1 = "history" ]; then git_open_history $2 $3
-  elif [ $1 = "branch" ]; then git_open_branch $2
-  elif [ $1 = "branches" ]; then git_branches $2
-  elif [ $1 = "pulls" ]; then git_open_pulls $@
-  elif [ $1 = "grep" ]; then git_grep $@
-  elif [ $1 = "ctrlp" ]; then git_ctrlp $2
-  elif [ $1 = "repo" ]; then git_open_repo $2 $3
-  elif [ $1 = "help" ]; then git_help
+  elif [ $gitit_command = "compare" ]; then git_open_compare $2
+  elif [ $gitit_command = "commits" ]; then git_open_commits $2
+  elif [ $gitit_command = "history" ]; then git_open_history $2 $3
+  elif [ $gitit_command = "branch" ]; then git_open_branch $2
+  elif [ $gitit_command = "branches" ]; then git_branches $2
+  elif [ $gitit_command = "pulls" ]; then git_open_pulls $@
+  elif [ $gitit_command = "grep" ]; then git_grep $@
+  elif [ $gitit_command = "ctrlp" ]; then git_ctrlp $2
+  elif [ $gitit_command = "repo" ]; then git_open_repo $2 $3
+  elif [ $gitit_command = "help" ]; then git_help
   else git_open_file $1 $2
   fi
 }
-
