@@ -93,8 +93,6 @@ If you want more git-related aliases for making your git workflow faster, also l
 
 
 ## Got any more plugins to share?
-* [Send.zsh](https://github.com/robertzk/send.zsh), a git command by ro
-bertzk that combines `git add .`, `git commit -a -m`, and `git push ori
-gin <branch>`.
+* [Send.zsh](https://github.com/robertzk/send.zsh), a git command by robertzk that combines `git add .`, `git commit -a -m`, and `git push origin <branch>`.
 * [Send.vim](https://github.com/peterhurford/send.vim), a vim plugin by
  me to do the above _without leaving vim_.
