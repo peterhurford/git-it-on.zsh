@@ -7,16 +7,26 @@ __open() {
   fi
 }
 
+__set_remote_branch() {
+    branch=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2> /dev/null)
+    if [ $? -eq 0 ]; then
+        branch="${branch/origin\//}"
+    else
+        false
+    fi
+}
+__set_local_branch() {
+    branch=$(git rev-parse --abbrev-ref HEAD)
+}
 
 git_set_repo() {
   repo_url=$(git config --get remote.origin.url)
-  branch=$(git rev-parse --abbrev-ref HEAD)
+  if ! __set_remote_branch; then __set_local_branch; fi
   url="${repo_url/git/https}"
   url="${url/httpshub/github}"
-  url="${url/.git//}"
+  url="${url/.git/}"
   url="${url/https@/https://}"
   url="${url/com:/com/}"
-  url="${url%/*}"
 }
 
 
