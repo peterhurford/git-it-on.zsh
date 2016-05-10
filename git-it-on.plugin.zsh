@@ -124,6 +124,17 @@ git_open_pulls() {
   fi
 }
 
+git_open_issues() {
+  git_set_repo
+  shift
+  if [ "$#" -eq 0 ]; then
+    __open "$url/issues"
+  elif [ $1 -ge 0 2>/dev/null ]; then
+    __open "$url/issues/$1"
+  else
+    __open "$url/issues?q=$@"
+  fi
+}
 
 git_grep() {
   git_set_repo
@@ -165,6 +176,8 @@ git_help() {
   echo '* `gitit` -- open your current folder, on your current branch, in GitHub.'
   echo '* `gitit <folder or file>` -- open that folder in your current branch (paths are relative).'
   echo '* For more, visit https://github.com/peterhurford/git-it-on.zsh or type `gitit repo peterhurford git-it-on.zsh`'
+  echo ''
+  echo 'Available first arguments: compare, commits, history, branch, branches, pulls, issues, grep, ctrlp, repo, help'
 }
 
 
@@ -177,6 +190,7 @@ gitit() {
   elif [ $gitit_command = "branch" ]; then git_open_branch $2
   elif [ $gitit_command = "branches" ]; then git_branches $2
   elif [ $gitit_command = "pulls" ]; then git_open_pulls $@
+  elif [ $gitit_command = "issues" ]; then git_open_issues $@
   elif [ $gitit_command = "grep" ]; then git_grep $@
   elif [ $gitit_command = "ctrlp" ]; then git_ctrlp $2
   elif [ $gitit_command = "repo" ]; then git_open_repo $2 $3

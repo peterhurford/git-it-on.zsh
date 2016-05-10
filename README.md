@@ -52,6 +52,7 @@ curl -s https://raw.githubusercontent.com/peterhurford/git-it-on.zsh/master/git-
 * `gitit compare <branch>` -- opens the compare file for a chosen branch (compared with master).
 * `gitit commits` -- opens the commits for your current branch
 * `gitit commits <branch>` -- opens the commits for a chosen branch.
+* `gitit issues` -- open the list of issues.
 * `gitit history <filename>` -- opens the github history page for the file.
 * `gitit history <filename> <branch>` -- opens the history page for the file on the chosen branch.
 * `gitit pulls` -- open the list of pull requests for the repo.
