@@ -7,23 +7,34 @@ __open() {
   fi
 }
 
+__set_remote_branch() {
+    branch=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2> /dev/null)
+    if [ $? -eq 0 ]; then
+        branch="${branch/origin\//}"
+    else
+        false
+    fi
+}
+__set_local_branch() {
+    branch=$(git rev-parse --abbrev-ref HEAD)
+}
 
 git_set_repo() {
   repo_url=$(git config --get remote.origin.url)
-  branch=$(git rev-parse --abbrev-ref HEAD)
-  url="${repo_url/git/http}"
-  url="${url/httphub/github}"
-  url="${url/.git//}"
-  url="${url/http@/http://}"
+  if ! __set_remote_branch; then __set_local_branch; fi
+  url="${repo_url/git/https}"
+  url="${url/httpshub/github}"
+  url="${url/.git/}"
+  url="${url/https@/https://}"
   url="${url/com:/com/}"
-  url="${url%/*}"
 }
 
 
 git_open_file() {
+  file_path="$1"
   git_set_repo
-  if [ ! -f $1 ] && [ ! -d $1 ]; then
-    echo "$1 does not exist"; echo ""; git_help
+  if [ ! -f $file_path ] && [ ! -d $file_path ]; then
+    echo "$file_path does not exist"; echo ""; git_help
     return
   fi
 
@@ -68,20 +79,22 @@ git_open_commits() {
 
 
 git_open_history() {
+  file_name="$1"
   git_set_repo
   if [ "$#" -eq 2 ]; then
     branch="$2"
   fi
-  __open "$url/commits/$branch/$1"
+  __open "$url/commits/$branch/$file_name"
 }
 
 
 git_open_branch() {
+  branch_name="$1"
   git_set_repo
   if [ "$#" -eq 0 ]; then
     git_open_file
   else
-    __open "$url/tree/$1"
+    __open "$url/tree/$branch_name"
   fi
 }
 
@@ -148,7 +161,9 @@ git_ctrlp() {
 
 git_open_repo() {
   if [ "$#" -eq 2 ]; then
-    __open "http://www.github.com/$1/$2"
+    username="$1"
+    reponame="$2"
+    __open "http://www.github.com/$username/$reponame"
   else
     git_open_file $1
   fi
@@ -167,18 +182,19 @@ git_help() {
 
 
 gitit() {
+  gitit_command="$1"
   if [ $# -eq 0 ]; then git_open_file
-  elif [ $1 = "compare" ]; then git_open_compare $2
-  elif [ $1 = "commits" ]; then git_open_commits $2
-  elif [ $1 = "history" ]; then git_open_history $2 $3
-  elif [ $1 = "branch" ]; then git_open_branch $2
-  elif [ $1 = "branches" ]; then git_branches $2
-  elif [ $1 = "pulls" ]; then git_open_pulls $@
-  elif [ $1 = "issues" ]; then git_open_issues $@
-  elif [ $1 = "grep" ]; then git_grep $@
-  elif [ $1 = "ctrlp" ]; then git_ctrlp $2
-  elif [ $1 = "repo" ]; then git_open_repo $2 $3
-  elif [ $1 = "help" ]; then git_help
+  elif [ $gitit_command = "compare" ]; then git_open_compare $2
+  elif [ $gitit_command = "commits" ]; then git_open_commits $2
+  elif [ $gitit_command = "history" ]; then git_open_history $2 $3
+  elif [ $gitit_command = "branch" ]; then git_open_branch $2
+  elif [ $gitit_command = "branches" ]; then git_branches $2
+  elif [ $gitit_command = "pulls" ]; then git_open_pulls $@
+  elif [ $gitit_command = "issues" ]; then git_open_issues $@
+  elif [ $gitit_command = "grep" ]; then git_grep $@
+  elif [ $gitit_command = "ctrlp" ]; then git_ctrlp $2
+  elif [ $gitit_command = "repo" ]; then git_open_repo $2 $3
+  elif [ $gitit_command = "help" ]; then git_help
   else git_open_file $1 $2
   fi
 }
