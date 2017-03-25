@@ -14,7 +14,7 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 
 *Note:* This was built on a Mac.  Support for Linux is experimental, and has not been tested by the plugin author.
 
--
+--
 
 ### Oh-My-ZSH
 Assuming you have [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), you can simply write
@@ -26,7 +26,8 @@ echo "plugins+=(git-it-on)" >> ~/.zshrc
 
 (Alternatively, you can place the `git-it-on` plugin in the `plugins=(...)` local manually.)
 
--
+--
+
 ### Antigen
 Add `antigen bundle peterhurford/git-it-on.zsh` to your `.zshrc` wherever you're adding the other antigen bundles.
 
