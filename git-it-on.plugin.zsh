@@ -27,6 +27,8 @@ git_set_repo() {
   url="${url/.git/}"
   url="${url/https@/https://}"
   url="${url/com:/com/}"
+  url="${url/edu:/edu/}"
+  url="${url/org:/org/}"
   url="${url/ssh:\/\/}"
 }
 
@@ -170,6 +172,54 @@ git_open_repo() {
   fi
 }
 
+gitlab_open_compare() {
+	git_set_repo
+	shift
+	if [ "$#" -eq 0 ]; then
+		src="$(git rev-parse --abbrev-ref HEAD)"
+		target="master"
+	elif [ "$#" -eq 1 ]; then
+		src="$(git rev-parse --abbrev-ref HEAD)"
+		target="$1"
+	else
+		src="$2"
+		target="$1"
+	fi
+	__open "$url/compare/$target...$src"
+}
+
+gitlab_open_branches() {
+  git_set_repo
+  __open "$url/branches"
+}
+
+gitlab_open_network() {
+	git_set_repo
+	local branch="$(git rev-parse --abbrev-ref HEAD)"
+	__open "$url/network/$branch"
+}
+
+gitlab_ctrlp() {
+  git_set_repo
+  if [ "$#" -eq 0 ]; then
+    branch="master"
+  else
+    branch=$1
+  fi
+  __open "$url/find_file/$branch"
+}
+
+gitlab_open_merges() {
+  git_set_repo
+  shift
+  if [ "$#" -eq 0 ]; then
+    __open "$url/merge_requests"
+  elif [ $1 -ge 0 2>/dev/null ]; then
+    __open "$url/merge_requests/$1"
+  else
+    __open "$url/merge_requests?scope=all&utf8=✓&state=opened&search=$@"
+  fi
+}
 
 git_help() {
   echo 'GIT IT ON'
@@ -185,6 +235,8 @@ git_help() {
 gitit() {
   gitit_command="$1"
   if [ $# -eq 0 ]; then git_open_file
+
+  # github commands
   elif [ $gitit_command = "compare" ]; then git_open_compare $2
   elif [ $gitit_command = "commits" ]; then git_open_commits $2
   elif [ $gitit_command = "history" ]; then git_open_history $2 $3
@@ -195,6 +247,17 @@ gitit() {
   elif [ $gitit_command = "grep" ]; then git_grep $@
   elif [ $gitit_command = "ctrlp" ]; then git_ctrlp $2
   elif [ $gitit_command = "repo" ]; then git_open_repo $2 $3
+
+  # gitlab commands
+  elif [ $gitit_command = "glcompare" ]; then git_open_commits $2
+  elif [ $gitit_command = "glcommits" ]; then git_open_commits $2
+  elif [ $gitit_command = "glhistory" ]; then git_open_history $2 $3
+  elif [ $gitit_command = "glbranches" ]; then gitlab_open_branches
+  elif [ $gitit_command = "glmerges" ]; then gitlab_open_merges $@
+  elif [ $gitit_command = "glissues" ]; then git_open_issues $@
+  elif [ $gitit_command = "glctrlp" ]; then gitlab_ctrlp $2
+  elif [ $gitit_command = "glnetwork" ]; then gitlab_open_network
+
   elif [ $gitit_command = "help" ]; then git_help
   else git_open_file $1 $2
   fi
