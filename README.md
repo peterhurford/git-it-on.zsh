@@ -85,6 +85,10 @@ curl -s https://raw.githubusercontent.com/peterhurford/git-it-on.zsh/master/git-
 * `gitit glctrlp <query>` -- search using the gitlab file finder
 * `gitit glnetwork` -- open the GitLab repository graph
 
+#### Gitlab Short Commands:
+Gitlab commands also have short alternatives:  
+`glcompare|glcm, glcommits|glco, glhistory|glh, glbranches|glb, glmerges|glm, glissues|gli, glctrlp|glcr, glnetwork|gln`
+
 
 ## But why even leave vim for the command line?
 TODO: Make and link vim companion plugin.
