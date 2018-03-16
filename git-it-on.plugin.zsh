@@ -224,11 +224,14 @@ gitlab_open_merges() {
 git_help() {
   echo 'GIT IT ON'
   echo '============='
-  echo '* `gitit` -- open your current folder, on your current branch, in GitHub.'
+  echo '* `gitit` -- open your current folder, on your current branch, in GitHub or GitLab.'
   echo '* `gitit <folder or file>` -- open that folder in your current branch (paths are relative).'
   echo '* For more, visit https://github.com/peterhurford/git-it-on.zsh or type `gitit repo peterhurford git-it-on.zsh`'
   echo ''
-  echo 'Available first arguments: compare, commits, history, branch, branches, pulls, issues, grep, ctrlp, repo, help'
+  echo 'Available first arguments for GitHub repos:'
+  echo -e '\tcompare, commits, history, branch, branches, pulls, issues, grep, ctrlp, repo, help'
+  echo 'For GitLab repos:'
+  echo -e '\tglcompare, glcommits, glhistory, glbranches, glmerges, glissues, glctrlp, glnetwork, help'
 }
 
 

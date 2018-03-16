@@ -4,7 +4,7 @@ A lot of times we have to look at files on GitHub.  But this intrudes our ideal 
 
 *Git It On*, the plugin for zshell, comes in here.
 
-* `gitit` -- open your current folder, on your current branch, in GitHub
+* `gitit` -- open your current folder, on your current branch, in GitHub or GitLab
 * `gitit <folder or file>` -- opens that folder in your current branch (paths are relative)
 
 
@@ -46,6 +46,8 @@ curl -s https://raw.githubusercontent.com/peterhurford/git-it-on.zsh/master/git-
 
 ## That's cool... What else?
 
+### Well, for GitHub:
+
 * `gitit <folder or file> <branch>` -- opens that folder on the specified branch.
 * `gitit repo <username> <reponame>` -- opens up the specified repository.
 * `gitit branch <branch>` -- open the repo for a chosen branch.
@@ -65,7 +67,23 @@ curl -s https://raw.githubusercontent.com/peterhurford/git-it-on.zsh/master/git-
 * `gitit branches mine` -- open up a list of your branches.
 * `gitit grep <term>` -- opens the github search page for your term
 * `gitit ctrlp` -- opens the github file finder for master branch (note that you cannot pass search terms directly from the command line)
-* `giti ctrlp <branch>` -- opens the github file finder for your desired branch
+* `gitit ctrlp <branch>` -- opens the github file finder for your desired branch
+
+### And for GitLab:
+
+* `gitit <folder or file> <branch>` -- opens that folder on the specified branch.
+* `gitit glcompare` -- open a comparison for current branch to `master`
+* `gitit glcompare <src>` -- open a comparison for `src` to `master`
+* `gitit glcompare <src> <target>` -- open a comparison for `src` to `target`
+* `gitit glcommits <file>` -- open all commits; optionally specify `file` for all commits affecting it
+* `gitit glbranches` -- open the list of branches
+* `gitit glhistory <file> <branch>` -- open history of the current branch; optionally specify `file` and `branch`
+* `gitit glmerges` -- open merge requests page
+* `gitit glmerges <query>` -- open the list of pull requests with query (e.g. `variable_1`)
+* `gitit glmerges <number>` -- open page for merge request `<number>`
+* `gitit glissues <query|number>` -- similar to `glmerges`
+* `gitit glctrlp <query>` -- search using the gitlab file finder
+* `gitit glnetwork` -- open the GitLab repository graph
 
 
 ## But why even leave vim for the command line?
