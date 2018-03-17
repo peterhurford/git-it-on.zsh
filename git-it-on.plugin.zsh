@@ -19,9 +19,21 @@ __set_local_branch() {
     branch=$(git rev-parse --abbrev-ref HEAD)
 }
 
+# check if local branch is tracked upstream;
+# if not, set $branch to first remote branch (probably master from origin/master)
+__fix_local_untracked_branch() {
+  for line in $(git rev-parse --abbrev-ref --remotes); do
+    if [[ "$branch" == ${line/*\//} ]]; then return true; fi
+  done
+
+  local _branch=$(git rev-parse --abbrev-ref --remotes | head -n1)
+  branch=${_branch/*\//}
+}
+
 git_set_repo() {
   repo_url=$(git config --get remote.origin.url)
   if ! __set_remote_branch; then __set_local_branch; fi
+  __fix_local_untracked_branch
   url="${repo_url/git/https}"
   url="${url/httpshub/github}"
   url="${url/.git/}"
