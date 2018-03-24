@@ -19,14 +19,28 @@ __set_local_branch() {
     branch=$(git rev-parse --abbrev-ref HEAD)
 }
 
+# check if local branch is tracked upstream;
+# if not, set $branch to first remote branch (probably master from origin/master)
+__fix_local_untracked_branch() {
+  for line in $(git rev-parse --abbrev-ref --remotes); do
+    if [[ "$branch" == ${line/*\//} ]]; then return true; fi
+  done
+
+  local _branch=$(git rev-parse --abbrev-ref --remotes | head -n1)
+  branch=${_branch/*\//}
+}
+
 git_set_repo() {
   repo_url=$(git config --get remote.origin.url)
   if ! __set_remote_branch; then __set_local_branch; fi
+  __fix_local_untracked_branch
   url="${repo_url/git/https}"
   url="${url/httpshub/github}"
   url="${url/.git/}"
   url="${url/https@/https://}"
   url="${url/com:/com/}"
+  url="${url/edu:/edu/}"
+  url="${url/org:/org/}"
   url="${url/ssh:\/\/}"
 }
 
@@ -170,21 +184,74 @@ git_open_repo() {
   fi
 }
 
+gitlab_open_compare() {
+	git_set_repo
+	shift
+	if [ "$#" -eq 0 ]; then
+		src="$(git rev-parse --abbrev-ref HEAD)"
+		target="master"
+	elif [ "$#" -eq 1 ]; then
+		src="$(git rev-parse --abbrev-ref HEAD)"
+		target="$1"
+	else
+		src="$2"
+		target="$1"
+	fi
+	__open "$url/compare/$target...$src"
+}
+
+gitlab_open_branches() {
+  git_set_repo
+  __open "$url/branches"
+}
+
+gitlab_open_network() {
+	git_set_repo
+	local branch="$(git rev-parse --abbrev-ref HEAD)"
+	__open "$url/network/$branch"
+}
+
+gitlab_ctrlp() {
+  git_set_repo
+  if [ "$#" -eq 0 ]; then
+    branch="master"
+  else
+    branch=$1
+  fi
+  __open "$url/find_file/$branch"
+}
+
+gitlab_open_merges() {
+  git_set_repo
+  shift
+  if [ "$#" -eq 0 ]; then
+    __open "$url/merge_requests"
+  elif [ $1 -ge 0 2>/dev/null ]; then
+    __open "$url/merge_requests/$1"
+  else
+    __open "$url/merge_requests?scope=all&utf8=✓&state=opened&search=$@"
+  fi
+}
 
 git_help() {
   echo 'GIT IT ON'
   echo '============='
-  echo '* `gitit` -- open your current folder, on your current branch, in GitHub.'
+  echo '* `gitit` -- open your current folder, on your current branch, in GitHub or GitLab.'
   echo '* `gitit <folder or file>` -- open that folder in your current branch (paths are relative).'
   echo '* For more, visit https://github.com/peterhurford/git-it-on.zsh or type `gitit repo peterhurford git-it-on.zsh`'
   echo ''
-  echo 'Available first arguments: compare, commits, history, branch, branches, pulls, issues, grep, ctrlp, repo, help'
+  echo 'Available first arguments for GitHub repos:'
+  echo -e '\tcompare, commits, history, branch, branches, pulls, issues, grep, ctrlp, repo, help'
+  echo 'For GitLab repos:'
+  echo -e '\tglcompare|glcm, glcommits|glco, glhistory|glh, glbranches|glb, glmerges|glm, glissues|gli, glctrlp|glcr, glnetwork|gln, help'
 }
 
 
 gitit() {
   gitit_command="$1"
   if [ $# -eq 0 ]; then git_open_file
+
+  # github commands
   elif [ $gitit_command = "compare" ]; then git_open_compare $2
   elif [ $gitit_command = "commits" ]; then git_open_commits $2
   elif [ $gitit_command = "history" ]; then git_open_history $2 $3
@@ -195,6 +262,17 @@ gitit() {
   elif [ $gitit_command = "grep" ]; then git_grep $@
   elif [ $gitit_command = "ctrlp" ]; then git_ctrlp $2
   elif [ $gitit_command = "repo" ]; then git_open_repo $2 $3
+
+  # gitlab commands
+  elif [ $gitit_command = "glcompare" ]  || [ $gitit_command = "glcm" ]; then gitlab_open_compare $@
+  elif [ $gitit_command = "glcommits" ]  || [ $gitit_command = "glco" ]; then git_open_commits $2
+  elif [ $gitit_command = "glhistory" ]  || [ $gitit_command = "glh" ]; then git_open_history $2 $3
+  elif [ $gitit_command = "glbranches" ] || [ $gitit_command = "glb" ]; then gitlab_open_branches
+  elif [ $gitit_command = "glmerges" ]   || [ $gitit_command = "glm" ]; then gitlab_open_merges $@
+  elif [ $gitit_command = "glissues" ]   || [ $gitit_command = "gli" ]; then git_open_issues $@
+  elif [ $gitit_command = "glctrlp" ]    || [ $gitit_command = "glcr" ]; then gitlab_ctrlp $2
+  elif [ $gitit_command = "glnetwork" ]  || [ $gitit_command = "gln" ]; then gitlab_open_network
+
   elif [ $gitit_command = "help" ]; then git_help
   else git_open_file $1 $2
   fi
