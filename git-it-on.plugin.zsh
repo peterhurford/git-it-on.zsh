@@ -23,11 +23,14 @@ __set_local_branch() {
 # if not, set $branch to first remote branch (probably master from origin/master)
 __fix_local_untracked_branch() {
   for line in $(git rev-parse --abbrev-ref --remotes); do
-    if [[ "$branch" == ${line/*\//} ]]; then return true; fi
+    local _line="$(echo $line | cut -f2- -d'/')"
+    if [[ "$branch" == "$_line" ]]; then return true; fi
   done
 
-  local _branch=$(git rev-parse --abbrev-ref --remotes | head -n1)
-  branch=${_branch/*\//}
+  # head -n1 gets the first branch name on the remote
+  # the cut command removes the leading remote name and slash from the full branch name
+  local _branch=$(git rev-parse --abbrev-ref --remotes | head -n1 | cut -f2- -d'/')
+  branch=$_branch
 }
 
 git_set_repo() {
