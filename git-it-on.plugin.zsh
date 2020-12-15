@@ -39,6 +39,7 @@ git_set_repo() {
   __fix_local_untracked_branch
   url="${repo_url/git/https}"
   url="${url/httpshub/github}"
+  url="${url/httpslab/gitlab}"
   url="${url/.git/}"
   url="${url/https@/https://}"
   url="${url/com:/com/}"
