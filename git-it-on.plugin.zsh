@@ -1,7 +1,17 @@
 #!/bin/zsh
+IN_WSL=false
+if [ -n "$WSL_DISTRO_NAME" ]; then
+  IN_WSL=true
+elif [[ $(uname -a | grep -i 'Microsoft') ]]; then
+  IN_WSL=true
+fi
+
 __open() {
   if [ "$(uname -s)" = "Darwin" ]; then
     open "$1" 2> /dev/null
+  elif if $IN_WSL; then
+    # for cmd.exe, need to use ^ to escape the following: ()%!^"<>&|
+    cmd.exe /c "start $(echo "$1" | sed "s~\([\(\)%\!^\"<>&|]\)~\^\1~g")" &> /dev/null
   else
     xdg-open "$1" &> /dev/null
   fi
