@@ -10,7 +10,8 @@ __open() {
   if [ "$(uname -s)" = "Darwin" ]; then
     open "$1" 2> /dev/null
   elif if $IN_WSL; then
-    cmd.exe /c "start $1"
+    # for cmd.exe, need to use ^ to escape the following: ()%!^"<>&|
+    cmd.exe /c "start $(echo "$1" | sed "s~\([\(\)%\!^\"<>&|]\)~\^\1~g")"
   else
     xdg-open "$1" &> /dev/null
   fi
