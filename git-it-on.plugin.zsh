@@ -1,7 +1,16 @@
 #!/bin/zsh
+IN_WSL=false
+if [ -n "$WSL_DISTRO_NAME" ]; then
+  IN_WSL=true
+elif [[ $(uname -a | grep -i 'Microsoft') ]]; then
+  IN_WSL=true
+fi
+
 __open() {
   if [ "$(uname -s)" = "Darwin" ]; then
     open "$1" 2> /dev/null
+  elif if $IN_WSL; then
+    cmd.exe /c "start $1"
   else
     xdg-open "$1" &> /dev/null
   fi
