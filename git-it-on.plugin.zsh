@@ -11,7 +11,7 @@ __open() {
     open "$1" 2> /dev/null
   elif if $IN_WSL; then
     # for cmd.exe, need to use ^ to escape the following: ()%!^"<>&|
-    cmd.exe /c "start $(echo "$1" | sed "s~\([\(\)%\!^\"<>&|]\)~\^\1~g")"
+    cmd.exe /c "start $(echo "$1" | sed "s~\([\(\)%\!^\"<>&|]\)~\^\1~g")" &> /dev/null
   else
     xdg-open "$1" &> /dev/null
   fi
